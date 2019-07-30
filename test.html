@@ -1,0 +1,31 @@
+{
+    {% for test_case_name, tests_results in all_results.items() %}
+            "{{ test_case_name }}":[
+                {% if tests_results %}
+                    {% for test_case in tests_results %}
+                        {
+                            "test_description":"{{test_case.test_description}}",
+                            "outcome":"{{test_case.outcome}}",
+                            "SUCCESS":{{test_case.SUCCESS}},
+                            "SKIP":{{test_case.SKIP}},
+                            "FAILURE":{{test_case.FAILURE}},
+                            "stdout":{% if test_case.stdout %} '{{test_case.stdout | replace('\n','') | replace('\r','') | replace('\n\r','') }}' {% else %} "" {% endif %},
+                            "err1": {% if test_case.err %} '{{test_case.err[0].__name__}}' {% else %} "" {% endif %},
+                            "err2":  {% if test_case.err %} '{{test_case.err[1]}}' {% else %} "" {% endif %},
+                            "err_info": {% if test_case.err %} '{{test_case.test_exception_info | replace('\n','') | replace('\r','') | replace('\n\r','') }}' {% else %} "" {% endif %}, 
+                        },
+                    {% endfor %}
+                {% endif %}
+            ],
+    {% endfor %}
+},
+
+
+{
+    {% for test_case_name, tests_results in all_results.items() %}
+            "{{ test_case_name }}":"{{ summaries[test_case_name] }}",
+    {% endfor %}
+},
+
+
+<!--  -->

@@ -83,83 +83,39 @@
         data () {
             return {
                 header_info: {
-                    "start_time":"2019-07-30 18:08:57.123255",
-                    "total":4,
-                    "success":3,
-                    "error":0,
-                    "failure":1,
-                    "skip":0,
-                    "duration":"658 ms",
+                    "start_time":"{{header_info.start_time}}",
+                    "total":{{header_info.status.total}},
+                    "success":{{header_info.status.total - header_info.status.error - header_info.status.failure - header_info.status.skip }},
+                    "error":{{header_info.status.error}},
+                    "failure":{{header_info.status.failure}},
+                    "skip":{{header_info.status.skip}},
+                    "duration":"{{header_info.status.duration}}",
                 },
                 all_results: {
-                    
-                            "test_profit.profit":[
-                                
-                                    
+                    {% for test_case_name, tests_results in all_results.items() %}
+                            "{{ test_case_name }}":[
+                                {% if tests_results %}
+                                    {% for test_case in tests_results %}
                                         {
-                                            "test_description":"test_af_profit_getUserProfit (test_profit.profit)",
-                                            "outcome":"0",
-                                            "SUCCESS":0,
-                                            "SKIP":3,
-                                            "FAILURE":1,
-                                            "stdout": '462' ,
-                                            "err1":  "" ,
-                                            "err2":   "" ,
-                                            "err_info":  "" , 
+                                            "test_description":"{{test_case.test_description}}",
+                                            "outcome":"{{test_case.outcome}}",
+                                            "SUCCESS":{{test_case.SUCCESS}},
+                                            "SKIP":{{test_case.SKIP}},
+                                            "FAILURE":{{test_case.FAILURE}},
+                                            "stdout":{% if test_case.stdout %} '{{test_case.stdout | replace('\n','') | replace('\r','') | replace('\n\r','') }}' {% else %} "" {% endif %},
+                                            "err1": {% if test_case.err %} '{{test_case.err[0].__name__}}' {% else %} "" {% endif %},
+                                            "err2":  {% if test_case.err %} '{{test_case.err[1]}}' {% else %} "" {% endif %},
+                                            "err_info": {% if test_case.err %} '{{test_case.test_exception_info | replace('\n','') | replace('\r','') | replace('\n\r','') }}' {% else %} "" {% endif %}, 
                                         },
-                                    
-                                        {
-                                            "test_description":"test_harvest_profit (test_profit.profit)",
-                                            "outcome":"1",
-                                            "SUCCESS":0,
-                                            "SKIP":3,
-                                            "FAILURE":1,
-                                            "stdout": "" ,
-                                            "err1":  'AssertionError' ,
-                                            "err2":   '200 != 20022' ,
-                                            "err_info":  'Traceback (most recent call last):  File "/Users/mingyuan/python/game-test/af/test_profit.py", line 35, in test_harvest_profit    self.assertEqual(res["code"], 20022)AssertionError: 200 != 20022' , 
-                                        },
-                                    
-                                
+                                    {% endfor %}
+                                {% endif %}
                             ],
-                    
-                            "test_user.user":[
-                                
-                                    
-                                        {
-                                            "test_description":"test_getGameData (test_user.user)",
-                                            "outcome":"0",
-                                            "SUCCESS":0,
-                                            "SKIP":3,
-                                            "FAILURE":1,
-                                            "stdout": "" ,
-                                            "err1":  "" ,
-                                            "err2":   "" ,
-                                            "err_info":  "" , 
-                                        },
-                                    
-                                        {
-                                            "test_description":"test_updateGameData (test_user.user)",
-                                            "outcome":"0",
-                                            "SUCCESS":0,
-                                            "SKIP":3,
-                                            "FAILURE":1,
-                                            "stdout": "" ,
-                                            "err1":  "" ,
-                                            "err2":   "" ,
-                                            "err_info":  "" , 
-                                        },
-                                    
-                                
-                            ],
-                    
+                    {% endfor %}
                 },
                 summaries:{
-                    
-                            "test_profit.profit":"{'total': 2, 'error': 0, 'failure': 1, 'skip': 0, 'success': 1, 'duration': '227 ms'}",
-                    
-                            "test_user.user":"{'total': 2, 'error': 0, 'failure': 0, 'skip': 0, 'success': 2, 'duration': '430 ms'}",
-                    
+                    {% for test_case_name, tests_results in all_results.items() %}
+                            "{{ test_case_name }}":"{{ summaries[test_case_name] }}",
+                    {% endfor %}
                 },
             }
         },

@@ -4,14 +4,15 @@ import config
 class user(unittest.TestCase):
     def test_getGameData(self):
         params = {
-            "userid":5
+            "userid":11
         }
         response = requests.post(config.api + "af/user/getGameData", json=params)
         res = response.json()
         self.assertEqual(res["code"], 200)
+        
     def test_updateGameData(self):
         params = {
-            "userid":5,
+            "userid":11,
             "gold":"0",
             "guide":"1-2",
             "music":0, 
