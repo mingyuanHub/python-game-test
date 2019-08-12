@@ -11,6 +11,7 @@
     <script src="https://code.highcharts.com.cn/highcharts/highcharts-3d.js"></script>
     <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
     <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/themes/grid-light.js"></script>
     
 </head>
 <body>
@@ -34,8 +35,28 @@
                         </div>
                     </i-menu>
                 </Header>
-                <Content :style="{margin: '88px 20px 0', background: '#fff', minHeight: '600px'}">
-                    <div id="container" style="height: 400px"></div>
+                <Content :style="{margin: '68px 0px 0px 0px', background: '#fff', minHeight: '600px'}">
+                    <row  :gutter="16">
+                        <i-col span="12">
+                            <Collapse simple>
+                                <Panel name="1">
+                                    史蒂夫·乔布斯
+                                    <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
+                                </Panel>
+                                <Panel name="2">
+                                    斯蒂夫·盖瑞·沃兹尼亚克
+                                    <p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>
+                                </Panel>
+                                <Panel name="3">
+                                    乔纳森·伊夫
+                                    <p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>
+                                </Panel>
+                            </Collapse>
+                        </i-col>
+                        <i-col span="12" style="outline-width: 1px">
+                            <div id="container" style="height: 400px;"></div>
+                        </i-col>
+                    </row>
                 </Content>
                 <Footer class="layout-footer-center">2016-2019 &copy; Zhuan Fang</Footer>
             </Layout>
@@ -137,7 +158,8 @@
                         type: 'pie',
                         options3d: {
                             enabled: true,
-                            alpha: 45
+                            alpha: 45,
+                            beta: 0
                         }
                 },
                 title: {
@@ -148,8 +170,13 @@
                 },
                 plotOptions: {
                     pie: {
-                            innerSize: 100,
-                            depth: 45
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        depth: 35,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}'
+                        }
                     }
                 },
                 series: [
@@ -157,7 +184,12 @@
                         name: 'Test Case ',
                         data: [
                             ['成功', this.header_info.success],
-                            ['失败', this.header_info.failure],
+                            {
+                                name: '失败',
+                                y: this.header_info.failure,
+                                sliced: true,
+                                selected: true,
+                            },
                             ['报错', this.header_info.error],
                             ['忽略', this.header_info.skip],
                         ]
@@ -173,7 +205,7 @@
 <style>
     .layout{
         border: 1px solid #d7dde4;
-        background: #f5f7f9;
+        background: #ffdb43;
         position: relative;
         border-radius: 4px;
         overflow: hidden;
@@ -195,5 +227,11 @@
     }
     .layout-footer-center{
         text-align: center;
+    }
+    .ivu-menu-dark {
+        background: #3b6d95;
+    }
+    .ivu-layout{
+        background:#ffd739;
     }
 </style>
