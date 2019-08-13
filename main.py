@@ -7,7 +7,7 @@ def get_suilt_all():
     return suite
 
 def get_runner():
-    runner = HtmlTestRunner.HTMLTestRunner(output = 'python-game-test/report', template='./python-game-test/report/index.html', combine_reports = True, report_name = "game-test-report",  add_timestamp = False)
+    runner = HtmlTestRunner.HTMLTestRunner(output = 'python-game-test/report', template='./python-game-test/report/template.html', combine_reports = True, report_name = "game-test-report",  add_timestamp = False)
     return runner
         
 if __name__ == '__main__':
