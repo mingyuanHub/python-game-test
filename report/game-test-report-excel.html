@@ -79,13 +79,13 @@
         data () {
             return {
                 header_info: {
-                    "start_time":"2019-08-14 14:37:42.720006",
+                    "start_time":"2019-08-14 14:42:07.135481",
                     "total":1,
                     "success":0,
                     "error":0,
                     "failure":1,
                     "skip":0,
-                    "duration":"558 ms",
+                    "duration":"457 ms",
                 },
                 all_results: {
                     
@@ -110,7 +110,7 @@
                 },
                 summaries:{
                     
-                            "__main__.wxhash":"{'total': 1, 'error': 0, 'failure': 1, 'skip': 0, 'success': 0, 'duration': '558 ms'}",
+                            "__main__.wxhash":"{'total': 1, 'error': 0, 'failure': 1, 'skip': 0, 'success': 0, 'duration': '457 ms'}",
                     
                 },
                 columns:[
@@ -150,7 +150,7 @@
                                                 h('Tooltip', {
                                                     props: {
                                                         "placement" : "top",
-                                                        "content": params.row.err1 + " :\n " + params.row.err2 + "\n" + params.row.err_info + "\n" +params.row.stdout,
+                                                        "content": params.row.err1 + " :\n " + params.row.err2 + "\n\n" + params.row.err_info + "\n" +params.row.stdout,
                                                     }
                                                 }, [
                                                     h('Button', {
