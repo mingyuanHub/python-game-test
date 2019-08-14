@@ -79,39 +79,39 @@
         data () {
             return {
                 header_info: {
-                    "start_time":"{{header_info.start_time}}",
-                    "total":{{header_info.status.total}},
-                    "success":{{header_info.status.total - header_info.status.error - header_info.status.failure - header_info.status.skip }},
-                    "error":{{header_info.status.error}},
-                    "failure":{{header_info.status.failure}},
-                    "skip":{{header_info.status.skip}},
-                    "duration":"{{header_info.status.duration}}",
+                    "start_time":"2019-08-14 14:37:42.720006",
+                    "total":1,
+                    "success":0,
+                    "error":0,
+                    "failure":1,
+                    "skip":0,
+                    "duration":"558 ms",
                 },
                 all_results: {
-                    {% for test_case_name, tests_results in all_results.items() %}
-                            "{{ test_case_name }}":[
-                                {% if tests_results %}
-                                    {% for test_case in tests_results %}
+                    
+                            "__main__.wxhash":[
+                                
+                                    
                                         {
-                                            "test_description":"{{test_case.test_description}}",
-                                            "outcome":{{test_case.outcome}},
-                                            "SUCCESS":{{test_case.SUCCESS}},
-                                            "SKIP":{{test_case.SKIP}},
-                                            "FAILURE":{{test_case.FAILURE}},
-                                            "stdout":{% if test_case.stdout %} '{{test_case.stdout | replace('\n','') | replace('\r','') | replace('\n\r','') }}' {% else %} "" {% endif %},
-                                            "err1": {% if test_case.err %} '{{test_case.err[0].__name__}}' {% else %} "" {% endif %},
-                                            "err2":  {% if test_case.err %} '{{test_case.err[1] | replace('\n','') | replace('\r','') | replace('\n\r','') | replace('\'','"') }}' {% else %} "" {% endif %},
-                                            "err_info": {% if test_case.err %} '{{test_case.test_exception_info | replace('\n','') | replace('\r','') | replace('\n\r','') | replace('\'','"') }}' {% else %} "" {% endif %}, 
+                                            "test_description":"test_tries (__main__.wxhash)",
+                                            "outcome":1,
+                                            "SUCCESS":0,
+                                            "SKIP":3,
+                                            "FAILURE":1,
+                                            "stdout": "" ,
+                                            "err1":  'AssertionError' ,
+                                            "err2":   '"010009" != "0100091"- 010009+ 0100091?       + : 【1.0报错啦】' ,
+                                            "err_info":  'Traceback (most recent call last):  File "/Users/mingyuan/python/python-game-test/excel/test_hash.py", line 24, in test_tries    self.assertEqual(res["code"], code, msg)AssertionError: "010009" != "0100091"- 010009+ 0100091?       + : 【1.0报错啦】' , 
                                         },
-                                    {% endfor %}
-                                {% endif %}
+                                    
+                                
                             ],
-                    {% endfor %}
+                    
                 },
                 summaries:{
-                    {% for test_case_name, tests_results in all_results.items() %}
-                            "{{ test_case_name }}":"{{ summaries[test_case_name] }}",
-                    {% endfor %}
+                    
+                            "__main__.wxhash":"{'total': 1, 'error': 0, 'failure': 1, 'skip': 0, 'success': 0, 'duration': '558 ms'}",
+                    
                 },
                 columns:[
                     {title: '用例',key: 'name'},{title: '结果',key: 'status',width: 250,render: (h, params) => {
