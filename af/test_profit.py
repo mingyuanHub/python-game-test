@@ -32,9 +32,9 @@ class profit(unittest.TestCase):
         response = requests.post(url = self.api + "af/profit/harvestProfit", json = params)
         res = response.json()
         if profit.gold > 0 :
-            self.assertEqual(res["code"], 20022)
+            self.assertEqual(res["code"], 200)
         else:
-            self.assertEqual(res["code"], 10422)
+            self.assertEqual(res["code"], 104)
 
 if __name__ == '__main__':
     unittest.main()

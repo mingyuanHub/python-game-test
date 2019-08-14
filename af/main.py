@@ -10,6 +10,6 @@ def getAfSuite():
         
 if __name__ == '__main__':
     suite = getAfSuite()
-    testRunner=HtmlTestRunner.HTMLTestRunner(output='./python-game-test/report', template='./python-game-test/report/index.html', combine_reports=True, report_name="game-test-report",  add_timestamp=False)
+    testRunner=HtmlTestRunner.HTMLTestRunner(output='./python-game-test/report', template='./python-game-test/report/template.html', combine_reports=True, report_name="game-test-report",  add_timestamp=False)
     testRunner.run(suite)
 

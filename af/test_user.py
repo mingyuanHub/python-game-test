@@ -13,6 +13,7 @@ class user(unittest.TestCase):
     def test_updateGameData(self):
         params = {
             "userid":11,
+            "token" : "bc6d3446d8fb96375a90ac427cf29bdd",
             "gold":"0",
             "guide":"1-2",
             "music":0, 
